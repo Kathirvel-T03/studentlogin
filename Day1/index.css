@@ -1,0 +1,264 @@
+
+:root {
+    --color-primary: #004c99;
+    --color-primary-dark: #003366;
+    --color-accent: #ff6b6b; 
+    --color-text: #333333;
+    --color-background: #f4f7f6;
+    --color-form-bg: #ffffff;
+    --color-border: #cccccc;
+    --color-error: #cc0000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/*
+ * Container and Header Styling
+ */
+.registration-container {
+    background-color: var(--color-form-bg);
+    max-width: 900px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin: 30px 0; /* Vertical margin to keep it centered vertically */
+}
+
+.form-header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--color-border); /* Changed to use variable for consistency */
+    padding-bottom: 15px;
+}
+
+.form-header h1 {
+    font-weight: 700; /* Adjusted from 800 to match Poppins link weight */
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.form-header p {
+    color: #666;
+    font-size: 0.95em;
+}
+
+/*
+ * Form Layout (Grid)
+ */
+.registration-form {
+    display: grid;
+    gap: 20px;
+}
+
+.form-section {
+    border: 1px solid #e0e0e0;
+    padding: 25px;
+    border-radius: 8px;
+    display: grid;
+    /* Default layout: one column on mobile, two columns on desktop */
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.form-section legend {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--color-primary);
+    padding: 0 10px;
+    margin-left: -5px;
+}
+
+/* Desktop Layout (Two columns for efficiency) */
+@media (min-width: 768px) {
+    .form-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    /* Making specific elements span two columns */
+    .form-group-full, .form-group.grid-2 {
+        grid-column: span 2;
+    }
+    .form-group.grid-2 {
+        /* Inner grid for full name and email to align horizontally */
+        display: grid;
+        grid-template-columns: subgrid;
+        gap: 20px;
+    }
+}
+
+/*
+ * Input and Label Styling
+ */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: var(--color-text);
+}
+
+input:not([type="radio"]):not([type="checkbox"]),
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fcfcfc;
+}
+
+/* Focus and Hover Effects */
+input:not([type="radio"]):not([type="checkbox"]):hover,
+select:hover,
+textarea:hover {
+    border-color: #999;
+}
+
+input:not([type="radio"]):not([type="checkbox"]):focus,
+select:focus,
+textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 76, 153, 0.2); /* Soft primary color glow */
+    outline: none;
+}
+
+/* Error (Validation) Styles */
+input:not([type="radio"]):not([type="checkbox"]):invalid:not(:placeholder-shown),
+textarea:invalid:not(:placeholder-shown) {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1);
+}
+
+.file-note {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Radio Button */
+
+.form-group-radio {
+   
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+/* Make radio options equally sized */
+.radio-options input[type="radio"] + label {
+    flex-grow: 1; /* Distributes available space equally */
+    text-align: center;
+    padding: 10px 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+
+    /* Custom radio styling adjustments */
+    display: flex; /* Override default label display */
+    align-items: center;
+    justify-content: center; /* Center text within the option box */
+    font-weight: 400; /* Lighter weight for the option text */
+}
+
+/* Hide the native radio button */
+.radio-options input[type="radio"] {
+    position: absolute; /* Hide visually */
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Checked State - The visual selection */
+.radio-options input[type="radio"]:checked + label {
+    background-color:var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Focus and Hover State for Radio */
+.radio-options input[type="radio"]:focus + label,
+.radio-options input[type="radio"] + label:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 76, 153, 0.2);
+}
+
+@media (max-width: 767px) {
+    .radio-options input[type="radio"] + label {
+        flex-basis: 100%; /* Full width for better tapping on small screens */
+    }
+}
+
+/*
+ * Buttons Styling
+ */
+.form-actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.btn {
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.1s;
+}
+
+.btn-warning{
+    background-color:blue;
+    color: white;
+}
+
+.btn-submit:hover {
+    background-color: var(--color-primary-dark);
+    box-shadow: 0 4px 8px rgba(0, 76, 153, 0.2);
+}
+
+.btn-submit:active {
+    transform: translateY(1px);
+}
+
+.btn-reset {
+    background-color: #f1f1f1;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.btn-reset:hover {
+    background-color: #e0e0e0;
+}
